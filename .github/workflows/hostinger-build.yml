@@ -1,0 +1,51 @@
+name: Build for Hostinger
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Install pnpm
+      uses: pnpm/action-setup@v3
+      with:
+        version: 9
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'pnpm'
+
+    - name: Install Dependencies
+      run: pnpm install
+
+    - name: Build Application
+      run: pnpm run build
+
+    - name: Create .htaccess for Hostinger
+      run: |
+        cat <<EOF > ./artifacts/90storzon/dist/.htaccess
+        <IfModule mod_rewrite.c>
+          RewriteEngine On
+          RewriteBase /
+          RewriteRule ^index\.html$ - [L]
+          RewriteCond %{REQUEST_FILENAME} !-f
+          RewriteCond %{REQUEST_FILENAME} !-d
+          RewriteRule . /index.html [L]
+        </IfModule>
+        EOF
+
+    - name: Upload Hostinger Files
+      uses: actions/upload-artifact@v4
+      with:
+        name: Hostinger-Ready-Files
+        path: ./artifacts/90storzon/dist

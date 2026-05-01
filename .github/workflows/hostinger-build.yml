@@ -26,10 +26,10 @@ jobs:
         cache: 'pnpm'
 
     - name: Install Dependencies
-      run: pnpm install
+      run: pnpm install --no-frozen-lockfile
 
     - name: Build Application
-      run: pnpm run build
+      run: pnpm --filter @workspace/90storzon run build
 
     - name: Create .htaccess for Hostinger
       run: |

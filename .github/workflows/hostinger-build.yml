@@ -29,11 +29,14 @@ jobs:
       run: pnpm install --no-frozen-lockfile
 
     - name: Build Application
+      env:
+        PORT: 3000
+        BASE_PATH: "/"
       run: pnpm --filter @workspace/90storzon run build
 
     - name: Create .htaccess for Hostinger
       run: |
-        cat <<EOF > ./artifacts/90storzon/dist/.htaccess
+        cat <<EOF > ./artifacts/90storzon/dist/public/.htaccess
         <IfModule mod_rewrite.c>
           RewriteEngine On
           RewriteBase /
@@ -48,4 +51,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: Hostinger-Ready-Files
-        path: ./artifacts/90storzon/dist
+        path: ./artifacts/90storzon/dist/public

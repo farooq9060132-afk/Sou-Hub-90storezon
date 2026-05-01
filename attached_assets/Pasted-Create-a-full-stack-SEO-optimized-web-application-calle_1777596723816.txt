@@ -1,0 +1,139 @@
+Create a full-stack SEO-optimized web application called "90StorZon" using:
+
+Frontend: HTML, CSS, JavaScript
+Backend: Node.js with Express
+Database: MongoDB (or simple JSON storage if MongoDB not available)
+
+========================
+CORE FEATURES
+=============
+
+1. Homepage:
+
+* Clean modern UI
+* Display tools, shop products, and blog highlights
+* Navigation: Home, Tools, Blog, Shop, About, Contact, Login
+* Social media icons (Facebook, Instagram, TikTok, YouTube, LinkedIn)
+* Add external link section (Linktree or multiple websites)
+
+2. Tools Section:
+   Create separate pages for:
+
+* Age Calculator
+* BMI Calculator
+* Loan Calculator
+* Percentage Calculator
+* Word Counter
+* Password Generator
+* QR Code Generator
+* Unit Converter
+* Domain Authority Checker (basic UI)
+
+Each tool:
+
+* Fully functional with JavaScript
+* SEO optimized (meta tags)
+* Fast loading
+
+3. User Authentication:
+
+* Sign Up page (name, email, password)
+* Login page
+* Logout functionality
+* Store users in database
+* Basic password encryption
+* User dashboard (show user info)
+
+4. Admin Panel:
+
+* Secure admin login
+* Dashboard showing:
+
+  * Total users
+  * Website visits
+  * Tool usage stats
+* View registered users list
+* Ability to delete users
+* View traffic sources (basic analytics simulation)
+
+5. Analytics System:
+
+* Track:
+
+  * Page visits
+  * User location (IP-based basic detection)
+  * Referrer (where user came from)
+* Store analytics data in database
+* Show data in admin panel
+
+6. Shop Section:
+
+* Product listing page
+* Product detail page
+* Add to cart (basic)
+* External purchase link (redirect to your existing store or Linktree)
+* Highlight "Self Defense Kitchen Tools" products
+
+7. Blog Section:
+
+* Blog listing page
+* Individual blog pages
+* Add 3 SEO articles:
+
+  * How to Use Age Calculator
+  * Best Free BMI Tools
+  * Top Online Tools
+
+8. Social Media Integration:
+
+* Add icons linking to:
+
+  * Facebook
+  * Instagram
+  * TikTok
+  * YouTube
+  * LinkedIn
+* Add YouTube promotion section (embed video or link)
+
+9. SEO Optimization:
+
+* Meta title & description for all pages
+* Semantic HTML
+* Internal linking
+* Sitemap.xml
+* robots.txt
+
+10. Pages:
+
+* About Us
+* Contact (form)
+* Privacy Policy
+* Terms & Conditions
+
+========================
+TECH STRUCTURE
+==============
+
+* /public (HTML, CSS, JS)
+* /server (Node.js backend)
+* /routes
+* /models
+* /views (if templating used)
+* /css/style.css
+* /js/script.js
+
+========================
+OUTPUT REQUIREMENTS
+===================
+
+* Provide all files with clear file names
+* Ensure everything works together
+* Add instructions on how to run project in Replit
+* Make it ready for deployment on Hostinger or similar hosting
+
+========================
+GOAL
+====
+
+Create a complete business-ready website combining:
+Tools + Blog + Shop + User System + Admin Panel + Analytics

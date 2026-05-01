@@ -1,0 +1,136 @@
+Create a full-stack web app called "90StorZon" optimized for low resource usage (important: minimize API calls and keep code lightweight for Replit credits).
+
+TECH STACK:
+Frontend: HTML, CSS, Vanilla JavaScript
+Backend: Node.js + Express
+Database: MongoDB OR fallback to JSON file storage
+
+================================
+CORE FEATURES
+=============
+
+1. Public Website:
+
+* Homepage with tools, blog, and shop highlights
+* Tools pages (Age, BMI, Loan, Percentage, Word Counter, Password Generator, QR Code, Unit Converter)
+* Blog listing + single blog pages
+* Shop page with products (external links allowed)
+* About, Contact, Privacy, Terms pages
+* Social Media links (Facebook, Instagram, TikTok, YouTube, LinkedIn)
+
+================================
+2. USER SYSTEM
+==============
+
+* Sign Up / Login / Logout
+* Store users in database
+* Password hashing (basic security)
+* Simple user dashboard
+
+================================
+3. ADMIN PANEL (VERY IMPORTANT)
+===============================
+
+Create a secure admin panel:
+
+Admin Features:
+
+* Admin login (separate from users)
+
+Dashboard:
+
+* Total users count
+* Total visits
+* Tool usage stats
+
+CONTENT MANAGEMENT (CRUD):
+
+* Add / Edit / Delete BLOG POSTS
+* Add / Edit / Delete TOOLS (title, description, page link)
+* Add / Edit / Delete PRODUCTS (name, image, link, description)
+
+USER MANAGEMENT:
+
+* View all users
+* Delete users
+
+ANALYTICS:
+
+* Store:
+
+  * Page visits
+  * Referrer (source)
+  * Timestamp
+* Show simple analytics in dashboard
+
+================================
+4. PERFORMANCE OPTIMIZATION
+===========================
+
+* Use minimal dependencies
+* Avoid heavy frameworks
+* Use server-side rendering OR simple templates
+* Optimize for fast loading
+* Reduce repeated API/database calls
+
+================================
+5. TESTING SYSTEM (IMPORTANT)
+=============================
+
+Add a simple internal testing system:
+
+* Create a test script that checks:
+
+  * All pages load without error
+  * Tools return correct results
+  * Login/signup works
+  * Admin CRUD operations work
+
+* Add console logs:
+  "TEST PASSED" or "TEST FAILED"
+
+* Provide a command:
+  npm run test
+
+================================
+6. SEO OPTIMIZATION
+===================
+
+* Meta titles & descriptions for all pages
+* Semantic HTML
+* Internal linking
+* sitemap.xml
+* robots.txt
+
+================================
+7. FILE STRUCTURE
+=================
+
+/public
+index.html
+/tools
+/blog
+/shop
+/css
+/js
+/server
+/routes
+/models
+
+================================
+8. OUTPUT REQUIREMENTS
+======================
+
+* Provide ALL files with clear file names
+* Provide setup instructions for Replit
+* Provide deployment instructions (Hostinger / Node hosting)
+* Ensure project runs without errors
+
+================================
+GOAL
+====
+
+Build a complete lightweight business website with:
+Tools + Blog + Shop + User System + Admin Panel + Analytics + Testing
+
+Also ensure the project is optimized to use minimum Replit credits.

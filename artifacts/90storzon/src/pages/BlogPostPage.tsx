@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { Link, useParams } from "wouter";
 import { ArrowLeft, Calendar } from "lucide-react";
 import { useGetBlogPost, useTrackPageView, getGetBlogPostQueryKey } from "@workspace/api-client-react";
+import SEO from "@/components/SEO";
+import AdSense from "@/components/AdSense";
 
 export default function BlogPostPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -9,11 +11,8 @@ export default function BlogPostPage() {
   const trackPageView = useTrackPageView();
 
   useEffect(() => {
-    if (post) {
-      document.title = `${post.title} — 90StorZon Blog`;
-    }
     trackPageView.mutate({ data: { page: `/blog/${slug}`, referrer: document.referrer || undefined } });
-  }, [post, slug]);
+  }, [slug]);
 
   if (isLoading) {
     return (
@@ -38,6 +37,12 @@ export default function BlogPostPage() {
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
+      <SEO
+        title={post.metaTitle || post.title}
+        description={post.metaDescription || post.excerpt}
+        ogType="article"
+        canonical={`/blog/${slug}`}
+      />
       <Link href="/blog" className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground text-sm mb-6 transition-colors" data-testid="blog-back-link">
         <ArrowLeft className="w-4 h-4" /> Back to Blog
       </Link>
@@ -55,6 +60,8 @@ export default function BlogPostPage() {
 
       <div className="h-56 bg-gradient-to-br from-primary/20 to-accent/20 rounded-xl mb-8" />
 
+      <AdSense slot="in-content" className="mb-8" />
+
       <article className="prose prose-lg max-w-none text-foreground">
         {post.content.split('\n').map((line, i) => {
           if (line.startsWith('## ')) return <h2 key={i} className="text-2xl font-bold text-foreground mt-8 mb-3">{line.slice(3)}</h2>;
@@ -67,6 +74,10 @@ export default function BlogPostPage() {
           return <p key={i} className="text-foreground leading-relaxed my-3">{line}</p>;
         })}
       </article>
+
+      <div className="mt-10">
+        <AdSense slot="footer" />
+      </div>
     </div>
   );
 }

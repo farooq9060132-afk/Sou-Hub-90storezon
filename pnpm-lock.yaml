@@ -67,7 +67,7 @@ catalogs:
       specifier: ^7.3.2
       version: 7.3.2
     zod:
-      specifier: ^3.25.76
+      specifier: 3.25.76
       version: 3.25.76
 
 overrides:
@@ -336,7 +336,7 @@ importers:
         specifier: ^2.1.7
         version: 2.1.9(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       recharts:
-        specifier: ^2.15.2
+        specifier: ^2.15.4
         version: 2.15.4(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       sonner:
         specifier: ^2.0.7
@@ -401,6 +401,9 @@ importers:
       uuid:
         specifier: ^14.0.0
         version: 14.0.0
+      zod:
+        specifier: 'catalog:'
+        version: 3.25.76
     devDependencies:
       '@types/cookie-parser':
         specifier: ^1.4.10
@@ -657,6 +660,22 @@ importers:
         version: 0.31.9
 
   scripts:
+    dependencies:
+      '@types/bcrypt':
+        specifier: ^6.0.0
+        version: 6.0.0
+      '@workspace/db':
+        specifier: workspace:*
+        version: link:../lib/db
+      bcrypt:
+        specifier: ^6.0.0
+        version: 6.0.0
+      drizzle-orm:
+        specifier: 'catalog:'
+        version: 0.45.2(@types/pg@8.18.0)(pg@8.20.0)
+      pg:
+        specifier: ^8.20.0
+        version: 8.20.0
     devDependencies:
       '@types/node':
         specifier: 'catalog:'

@@ -6,12 +6,12 @@
  * OpenAPI spec version: 0.2.0
  */
 
-export interface CreateBlogPostBody {
-  title: string;
-  slug: string;
-  excerpt: string;
-  content: string;
-  category: string;
+export interface UpdateBlogPostBody {
+  title?: string;
+  slug?: string;
+  excerpt?: string;
+  content?: string;
+  category?: string;
   imageUrl?: string;
   metaTitle?: string;
   metaDescription?: string;

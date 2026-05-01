@@ -6,14 +6,12 @@
  * OpenAPI spec version: 0.2.0
  */
 
-export interface Product {
-  id: number;
+export interface CreateProductBody {
   name: string;
   description: string;
   price: number;
   imageUrl?: string;
   category: string;
   externalLink?: string;
-  featured: boolean;
-  clickCount?: number;
+  featured?: boolean;
 }

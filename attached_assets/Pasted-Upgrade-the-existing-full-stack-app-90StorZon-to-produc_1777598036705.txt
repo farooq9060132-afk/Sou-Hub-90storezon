@@ -1,0 +1,135 @@
+Upgrade the existing full-stack app "90StorZon" to production-level quality with focus on stability, SEO, monetization, and advanced admin control.
+
+IMPORTANT:
+
+* Do NOT rebuild from scratch
+* Improve existing architecture
+* Fix routing, API consistency, and performance
+
+================================
+
+1. FIX & STABILIZE BACKEND
+   ================================
+
+* Ensure all API routes work correctly:
+  /api/auth/*
+  /api/blog/*
+  /api/tools/*
+  /api/products/*
+  /api/analytics/*
+
+* Add proper error handling:
+
+  * 404 JSON responses
+  * Validation errors
+  * Try/catch for all controllers
+
+* Add request validation (Zod or similar)
+
+================================
+2. ADVANCED ADMIN PANEL
+=======================
+
+Enhance admin panel with full control:
+
+BLOG MANAGEMENT:
+
+* Rich text editor (or markdown)
+* Add / Edit / Delete posts
+* SEO fields (meta title, meta description)
+
+TOOLS MANAGEMENT:
+
+* Enable/disable tools
+* Edit tool descriptions
+
+PRODUCT MANAGEMENT:
+
+* Add affiliate links
+* Track clicks
+
+ANALYTICS DASHBOARD:
+
+* Real stats:
+
+  * Total visitors
+  * Top pages
+  * Traffic sources
+  * Device type
+
+================================
+3. REAL ANALYTICS SYSTEM
+========================
+
+Improve analytics:
+
+Track:
+
+* IP address (basic)
+* Country (via API or fallback)
+* Referrer (Google, Facebook, direct)
+* Page path
+* Timestamp
+
+Store in database and display charts in admin panel.
+
+================================
+4. SEO OPTIMIZATION (VERY IMPORTANT)
+====================================
+
+* Dynamic meta tags per page
+* Open Graph tags (Facebook sharing)
+* Twitter cards
+* Auto-generate sitemap.xml
+* robots.txt
+
+Add structured data:
+
+* Blog schema
+* Tool schema
+
+================================
+5. MONETIZATION SYSTEM
+======================
+
+* Add Google AdSense placeholders:
+
+  * Header
+  * Between content
+  * Sidebar
+
+* Affiliate system:
+
+  * Track clicks on product links
+  * Store click data
+
+================================
+6. PERFORMANCE OPTIMIZATION
+===========================
+
+* Lazy load components
+* Optimize images
+* Reduce API calls
+* Cache common data
+
+================================
+7. FINAL TESTING SYSTEM
+=======================
+
+Enhance test script:
+
+Check:
+
+* All APIs return correct responses
+* Auth works
+* Admin CRUD works
+* Tools calculations correct
+
+Output:
+"ALL TESTS PASSED"
+
+================================
+GOAL
+====
+
+Convert the current app into a scalable, SEO-friendly, monetizable production web platform.

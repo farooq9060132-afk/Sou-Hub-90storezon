@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { Link } from "wouter";
 import { ArrowRight, Calculator, Weight, DollarSign, Percent, FileText, Key, QrCode, RefreshCw, Globe, ExternalLink, Star, TrendingUp } from "lucide-react";
 import { useListBlogPosts, useListProducts, useTrackPageView, getListBlogPostsQueryKey, getListProductsQueryKey } from "@workspace/api-client-react";
+import SEO from "@/components/SEO";
+import AdSense from "@/components/AdSense";
 
 const tools = [
   { name: "Age Calculator", href: "/tools/age-calculator", icon: Calculator, desc: "Find your exact age" },
@@ -34,6 +36,12 @@ export default function HomePage() {
 
   return (
     <div>
+      <SEO
+        title="Free Online Tools, Products & Blog"
+        description="90StorZon — your all-in-one hub for free online tools (BMI, loans, QR codes, and more), quality products, and expert knowledge."
+        keywords="free online tools, bmi calculator, loan calculator, qr code generator, blog, online shop"
+        canonical="/"
+      />
       {/* Hero */}
       <section className="relative bg-gradient-to-br from-primary/10 via-background to-accent/5 py-20 px-4 overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern opacity-5" />

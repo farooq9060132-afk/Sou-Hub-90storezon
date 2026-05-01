@@ -1,18 +1,26 @@
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { Link, useParams } from "wouter";
 import { ArrowLeft, ShoppingCart, ExternalLink, Star } from "lucide-react";
-import { useGetProduct, useTrackPageView, getGetProductQueryKey } from "@workspace/api-client-react";
+import { useGetProduct, useTrackPageView, useTrackAffiliateClick, getGetProductQueryKey } from "@workspace/api-client-react";
+import SEO from "@/components/SEO";
+import AdSense from "@/components/AdSense";
 
 export default function ProductPage() {
   const { id } = useParams<{ id: string }>();
   const productId = parseInt(id, 10);
   const { data: product, isLoading, error } = useGetProduct(productId, { query: { queryKey: getGetProductQueryKey(productId), enabled: !isNaN(productId) } });
   const trackPageView = useTrackPageView();
+  const trackClick = useTrackAffiliateClick();
 
   useEffect(() => {
-    if (product) document.title = `${product.name} — 90StorZon Shop`;
     trackPageView.mutate({ data: { page: `/shop/${id}`, referrer: document.referrer || undefined } });
-  }, [product, id]);
+  }, [id]);
+
+  const handleBuyClick = useCallback(() => {
+    if (!isNaN(productId)) {
+      trackClick.mutate({ id: productId });
+    }
+  }, [productId]);
 
   if (isLoading) {
     return (
@@ -43,14 +51,24 @@ export default function ProductPage() {
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <SEO
+        title={product.name}
+        description={product.description}
+        ogType="article"
+        canonical={`/shop/${productId}`}
+      />
+
       <Link href="/shop" className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground text-sm mb-8 transition-colors" data-testid="product-back-link">
         <ArrowLeft className="w-4 h-4" /> Back to Shop
       </Link>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-        {/* Product Image */}
         <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-primary/20 to-accent/20 h-80 flex items-center justify-center">
-          <ShoppingCart className="w-24 h-24 text-primary/25" />
+          {product.imageUrl ? (
+            <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover" />
+          ) : (
+            <ShoppingCart className="w-24 h-24 text-primary/25" />
+          )}
           {product.featured && (
             <div className="absolute top-4 right-4 bg-accent text-accent-foreground text-sm font-bold px-3 py-1 rounded-full flex items-center gap-1.5">
               <Star className="w-3.5 h-3.5" /> Featured
@@ -58,7 +76,6 @@ export default function ProductPage() {
           )}
         </div>
 
-        {/* Product Info */}
         <div>
           <span className="text-sm font-medium text-muted-foreground">{product.category}</span>
           <h1 className="text-3xl font-bold text-foreground mt-1 mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>{product.name}</h1>
@@ -73,7 +90,8 @@ export default function ProductPage() {
               <a
                 href={product.externalLink}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener noreferrer sponsored"
+                onClick={handleBuyClick}
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-colors shadow-md"
                 data-testid="product-buy-link"
               >
@@ -91,6 +109,10 @@ export default function ProductPage() {
             </Link>
           </div>
         </div>
+      </div>
+
+      <div className="mt-12">
+        <AdSense slot="in-content" />
       </div>
     </div>
   );

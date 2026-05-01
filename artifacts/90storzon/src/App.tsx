@@ -1,32 +1,34 @@
+import { lazy, Suspense } from "react";
 import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Layout from "@/components/Layout";
-import HomePage from "@/pages/HomePage";
-import ToolsPage from "@/pages/ToolsPage";
-import AgeCalculatorPage from "@/pages/tools/AgeCalculatorPage";
-import BmiCalculatorPage from "@/pages/tools/BmiCalculatorPage";
-import LoanCalculatorPage from "@/pages/tools/LoanCalculatorPage";
-import PercentageCalculatorPage from "@/pages/tools/PercentageCalculatorPage";
-import WordCounterPage from "@/pages/tools/WordCounterPage";
-import PasswordGeneratorPage from "@/pages/tools/PasswordGeneratorPage";
-import QrCodeGeneratorPage from "@/pages/tools/QrCodeGeneratorPage";
-import UnitConverterPage from "@/pages/tools/UnitConverterPage";
-import DomainAuthorityPage from "@/pages/tools/DomainAuthorityPage";
-import BlogPage from "@/pages/BlogPage";
-import BlogPostPage from "@/pages/BlogPostPage";
-import ShopPage from "@/pages/ShopPage";
-import ProductPage from "@/pages/ProductPage";
-import AboutPage from "@/pages/AboutPage";
-import ContactPage from "@/pages/ContactPage";
-import PrivacyPolicyPage from "@/pages/PrivacyPolicyPage";
-import TermsPage from "@/pages/TermsPage";
-import LoginPage from "@/pages/LoginPage";
-import RegisterPage from "@/pages/RegisterPage";
-import DashboardPage from "@/pages/DashboardPage";
-import AdminPage from "@/pages/AdminPage";
-import NotFound from "@/pages/not-found";
+
+const HomePage = lazy(() => import("@/pages/HomePage"));
+const ToolsPage = lazy(() => import("@/pages/ToolsPage"));
+const AgeCalculatorPage = lazy(() => import("@/pages/tools/AgeCalculatorPage"));
+const BmiCalculatorPage = lazy(() => import("@/pages/tools/BmiCalculatorPage"));
+const LoanCalculatorPage = lazy(() => import("@/pages/tools/LoanCalculatorPage"));
+const PercentageCalculatorPage = lazy(() => import("@/pages/tools/PercentageCalculatorPage"));
+const WordCounterPage = lazy(() => import("@/pages/tools/WordCounterPage"));
+const PasswordGeneratorPage = lazy(() => import("@/pages/tools/PasswordGeneratorPage"));
+const QrCodeGeneratorPage = lazy(() => import("@/pages/tools/QrCodeGeneratorPage"));
+const UnitConverterPage = lazy(() => import("@/pages/tools/UnitConverterPage"));
+const DomainAuthorityPage = lazy(() => import("@/pages/tools/DomainAuthorityPage"));
+const BlogPage = lazy(() => import("@/pages/BlogPage"));
+const BlogPostPage = lazy(() => import("@/pages/BlogPostPage"));
+const ShopPage = lazy(() => import("@/pages/ShopPage"));
+const ProductPage = lazy(() => import("@/pages/ProductPage"));
+const AboutPage = lazy(() => import("@/pages/AboutPage"));
+const ContactPage = lazy(() => import("@/pages/ContactPage"));
+const PrivacyPolicyPage = lazy(() => import("@/pages/PrivacyPolicyPage"));
+const TermsPage = lazy(() => import("@/pages/TermsPage"));
+const LoginPage = lazy(() => import("@/pages/LoginPage"));
+const RegisterPage = lazy(() => import("@/pages/RegisterPage"));
+const DashboardPage = lazy(() => import("@/pages/DashboardPage"));
+const AdminPage = lazy(() => import("@/pages/AdminPage"));
+const NotFound = lazy(() => import("@/pages/not-found"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -37,35 +39,45 @@ const queryClient = new QueryClient({
   },
 });
 
+function PageLoader() {
+  return (
+    <div className="min-h-[60vh] flex items-center justify-center">
+      <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+    </div>
+  );
+}
+
 function Router() {
   return (
     <Layout>
-      <Switch>
-        <Route path="/" component={HomePage} />
-        <Route path="/tools" component={ToolsPage} />
-        <Route path="/tools/age-calculator" component={AgeCalculatorPage} />
-        <Route path="/tools/bmi-calculator" component={BmiCalculatorPage} />
-        <Route path="/tools/loan-calculator" component={LoanCalculatorPage} />
-        <Route path="/tools/percentage-calculator" component={PercentageCalculatorPage} />
-        <Route path="/tools/word-counter" component={WordCounterPage} />
-        <Route path="/tools/password-generator" component={PasswordGeneratorPage} />
-        <Route path="/tools/qr-code-generator" component={QrCodeGeneratorPage} />
-        <Route path="/tools/unit-converter" component={UnitConverterPage} />
-        <Route path="/tools/domain-authority-checker" component={DomainAuthorityPage} />
-        <Route path="/blog" component={BlogPage} />
-        <Route path="/blog/:slug" component={BlogPostPage} />
-        <Route path="/shop" component={ShopPage} />
-        <Route path="/shop/:id" component={ProductPage} />
-        <Route path="/about" component={AboutPage} />
-        <Route path="/contact" component={ContactPage} />
-        <Route path="/privacy-policy" component={PrivacyPolicyPage} />
-        <Route path="/terms" component={TermsPage} />
-        <Route path="/login" component={LoginPage} />
-        <Route path="/register" component={RegisterPage} />
-        <Route path="/dashboard" component={DashboardPage} />
-        <Route path="/admin" component={AdminPage} />
-        <Route component={NotFound} />
-      </Switch>
+      <Suspense fallback={<PageLoader />}>
+        <Switch>
+          <Route path="/" component={HomePage} />
+          <Route path="/tools" component={ToolsPage} />
+          <Route path="/tools/age-calculator" component={AgeCalculatorPage} />
+          <Route path="/tools/bmi-calculator" component={BmiCalculatorPage} />
+          <Route path="/tools/loan-calculator" component={LoanCalculatorPage} />
+          <Route path="/tools/percentage-calculator" component={PercentageCalculatorPage} />
+          <Route path="/tools/word-counter" component={WordCounterPage} />
+          <Route path="/tools/password-generator" component={PasswordGeneratorPage} />
+          <Route path="/tools/qr-code-generator" component={QrCodeGeneratorPage} />
+          <Route path="/tools/unit-converter" component={UnitConverterPage} />
+          <Route path="/tools/domain-authority-checker" component={DomainAuthorityPage} />
+          <Route path="/blog" component={BlogPage} />
+          <Route path="/blog/:slug" component={BlogPostPage} />
+          <Route path="/shop" component={ShopPage} />
+          <Route path="/shop/:id" component={ProductPage} />
+          <Route path="/about" component={AboutPage} />
+          <Route path="/contact" component={ContactPage} />
+          <Route path="/privacy-policy" component={PrivacyPolicyPage} />
+          <Route path="/terms" component={TermsPage} />
+          <Route path="/login" component={LoginPage} />
+          <Route path="/register" component={RegisterPage} />
+          <Route path="/dashboard" component={DashboardPage} />
+          <Route path="/admin" component={AdminPage} />
+          <Route component={NotFound} />
+        </Switch>
+      </Suspense>
     </Layout>
   );
 }

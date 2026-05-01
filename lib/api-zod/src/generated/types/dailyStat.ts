@@ -6,6 +6,7 @@
  * OpenAPI spec version: 0.2.0
  */
 
-export interface MessageResponse {
-  message: string;
+export interface DailyStat {
+  date: string;
+  count: number;
 }

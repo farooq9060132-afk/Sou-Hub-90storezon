@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Api
-  version: 0.1.0
+  version: 0.2.0
   description: 90StorZon API specification
 servers:
   - url: /api
@@ -216,6 +216,60 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
 
+  /blog/posts/by-id/{id}:
+    put:
+      operationId: updateBlogPost
+      tags: [blog]
+      summary: Update a blog post by ID (admin)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateBlogPostBody"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BlogPost"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    delete:
+      operationId: deleteBlogPost
+      tags: [blog]
+      summary: Delete a blog post by ID (admin)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageResponse"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
   /shop/products:
     get:
       operationId: listProducts
@@ -230,6 +284,23 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Product"
+    post:
+      operationId: createProduct
+      tags: [shop]
+      summary: Create a product (admin)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateProductBody"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
 
   /shop/products/{id}:
     get:
@@ -255,6 +326,92 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+    put:
+      operationId: updateProduct
+      tags: [shop]
+      summary: Update a product (admin)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateProductBody"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    delete:
+      operationId: deleteProduct
+      tags: [shop]
+      summary: Delete a product (admin)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageResponse"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /shop/products/{id}/click:
+    post:
+      operationId: trackAffiliateClick
+      tags: [shop]
+      summary: Track an affiliate link click
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Tracked
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageResponse"
+
+  /shop/affiliate-stats:
+    get:
+      operationId: getAffiliateStats
+      tags: [shop]
+      summary: Get affiliate click stats (admin)
+      responses:
+        "200":
+          description: Affiliate stats
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AffiliateStat"
 
   /analytics/track:
     post:
@@ -287,6 +444,21 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/AnalyticsSummary"
+
+  /analytics/daily:
+    get:
+      operationId: getDailyAnalytics
+      tags: [analytics]
+      summary: Get daily page view counts (admin)
+      responses:
+        "200":
+          description: Daily analytics
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DailyStat"
 
   /admin/users:
     get:
@@ -460,9 +632,15 @@ components:
           type: string
         imageUrl:
           type: string
+        metaTitle:
+          type: string
+        metaDescription:
+          type: string
         createdAt:
           type: string
-      required: [id, title, slug, excerpt, content, category, createdAt]
+        updatedAt:
+          type: string
+      required: [id, title, slug, excerpt, content, category, createdAt, updatedAt]
 
     CreateBlogPostBody:
       type: object
@@ -479,7 +657,31 @@ components:
           type: string
         imageUrl:
           type: string
+        metaTitle:
+          type: string
+        metaDescription:
+          type: string
       required: [title, slug, excerpt, content, category]
+
+    UpdateBlogPostBody:
+      type: object
+      properties:
+        title:
+          type: string
+        slug:
+          type: string
+        excerpt:
+          type: string
+        content:
+          type: string
+        category:
+          type: string
+        imageUrl:
+          type: string
+        metaTitle:
+          type: string
+        metaDescription:
+          type: string
 
     Product:
       type: object
@@ -500,7 +702,39 @@ components:
           type: string
         featured:
           type: boolean
+        clickCount:
+          type: integer
       required: [id, name, description, price, category, featured]
+
+    CreateProductBody:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+        imageUrl:
+          type: string
+        category:
+          type: string
+        externalLink:
+          type: string
+        featured:
+          type: boolean
+      required: [name, description, price, category]
+
+    AffiliateStat:
+      type: object
+      properties:
+        productId:
+          type: integer
+        productName:
+          type: string
+        count:
+          type: integer
+      required: [productId, productName, count]
 
     TrackPageViewBody:
       type: object
@@ -539,6 +773,15 @@ components:
                 type: integer
             required: [referrer, count]
       required: [totalPageViews, uniquePages, topPages, referrers]
+
+    DailyStat:
+      type: object
+      properties:
+        date:
+          type: string
+        count:
+          type: integer
+      required: [date, count]
 
     AdminStats:
       type: object

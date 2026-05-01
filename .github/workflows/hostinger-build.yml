@@ -33,16 +33,14 @@ jobs:
 
     - name: Create .htaccess for Hostinger
       run: |
-        cat <<EOF > ./artifacts/90storzon/dist/public/.htaccess
-        <IfModule mod_rewrite.c>
-          RewriteEngine On
-          RewriteBase /
-          RewriteRule ^index\.html$ - [L]
-          RewriteCond %{REQUEST_FILENAME} !-f
-          RewriteCond %{REQUEST_FILENAME} !-d
-          RewriteRule . /index.html [L]
-        </IfModule>
-        EOF
+        echo "<IfModule mod_rewrite.c>" > ./artifacts/90storzon/dist/public/.htaccess
+        echo "  RewriteEngine On" >> ./artifacts/90storzon/dist/public/.htaccess
+        echo "  RewriteBase /" >> ./artifacts/90storzon/dist/public/.htaccess
+        echo "  RewriteRule ^index\.html$ - [L]" >> ./artifacts/90storzon/dist/public/.htaccess
+        echo "  RewriteCond %{REQUEST_FILENAME} !-f" >> ./artifacts/90storzon/dist/public/.htaccess
+        echo "  RewriteCond %{REQUEST_FILENAME} !-d" >> ./artifacts/90storzon/dist/public/.htaccess
+        echo "  RewriteRule . /index.html [L]" >> ./artifacts/90storzon/dist/public/.htaccess
+        echo "</IfModule>" >> ./artifacts/90storzon/dist/public/.htaccess
 
     - name: Upload Hostinger Files
       uses: actions/upload-artifact@v4

@@ -17,7 +17,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '20'
+        node-version: '22'
 
     - name: Install pnpm
       run: npm install -g pnpm@9
@@ -29,7 +29,8 @@ jobs:
       env:
         PORT: 3000
         BASE_PATH: "/"
-      run: pnpm --filter @workspace/90storzon run build
+        NODE_ENV: production
+      run: pnpm -r --if-present run build
 
     - name: Create .htaccess for Hostinger
       run: |
